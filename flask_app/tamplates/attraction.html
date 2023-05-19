@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>파리 여행 투어 선택</title>
+    <style>
+        /* css 설정 */
+        /* 페이지 전체(body) 배경 설정 */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('attraction.jpg');
+            background-size: cover; /* 이미지를 화면에 꽉 채우도록 조절 */
+            background-repeat: no-repeat;
+            padding: 100px;
+        }
+
+        
+        /* 글씨(h1) 설정 */
+        h1 {
+            color: #fffaf4;
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-align: left; /* 왼쪽 정렬 */
+            margin-left: 0px;
+            text-shadow: 2px 2px 4px #5c59f8;
+        }
+
+        /* 글씨 + 흰색박스 전체 위치 설정 */
+        .flight-selection-container {
+            margin-top: 200px;
+        }
+        h2 {
+            color:#fffaf4;
+            font-size: 40px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: left; /* 왼쪽 정렬 */
+            margin-left: 20px;
+            text-shadow: 2px 2px 4px #000000;
+        }
+
+        /* 흰색 박스 설정 */
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            width: 25%; /* 화면의 오른쪽 절반 차지 */
+            margin: 0 auto;
+            margin-left: 0;
+        }
+
+        /* 글씨(label) 설정 */
+        label {
+            color: #c71919;
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        /* 버튼 설정(가격 확인, 이전 화면으로, 완료하기) */
+        .button-container input[type="submit"],
+        .button-container input[type="button"],
+        .button-container input[type="next"] {
+            font-family: Arial, sans-serif;
+            padding: 8px;
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 30%; /* 버튼 너비 조정 */
+            margin-bottom: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button-container input[type="button"] {
+            background-color: #ff8484;
+        }
+
+        
+        .date-container {
+            display: flex; /* 버튼들을 가로 방향으로 정렬 */
+            justify-content: space-between; /* 버튼들 사이의 공간을 동일하게 배분 */
+        }
+
+        .button-container {
+            display: flex; /* 버튼들을 가로 방향으로 정렬 */
+            justify-content: space-between; /* 버튼들 사이의 공간을 동일하게 배분 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class='tableauPlaceholder' id='viz1684472621541' style='position: relative'>
+        <h2>어트랙션 가격</h2>
+        <noscript>
+            <a href='#'>
+                <img alt='관광지 '
+                    src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_16844649079910&#47;sheet11&#47;1_rss.png'
+                    style='border: none' />
+            </a>
+        </noscript>
+        <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='_16844649079910&#47;sheet11' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image'
+                value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;_1&#47;_16844649079910&#47;sheet11&#47;1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='ko-KR' />
+        </object>
+    </div>
+    <div class="flight-selection-container">
+        <h1>투어 선택</h1>
+        <div class="form-container">
+            <form action="/price-selection" method="post">
+                <!-- 다른 카테고리 옵션 추가 -->
+                <label for="airline">카테고리:</label>
+                <select id="airline" name="airline">
+                    <option value="day-trip">하루 여행</option>
+                    <option value="guide_tour">가이드 여행</option>
+                    <option value="private_tour">개인 투어</option>
+                    <option value="entry_ticket">입장권</option>
+                    <option value="그 외 등급">그 외</option>
+                </select>
+
+                <label for="seat-class">여행객 평가:</label>
+                <select id="seat-class" name="seat-class">
+                    <option value="4점대">4~5</option>
+                    <option value="3점대">3~4</option>
+                    <option value="2점대">2~3</option>
+                    <option value="1점대">1~2</option>
+                    <option value="etc">그 외</option>
+
+                </select>
+                
+                <!-- 선택한 투어 * 인원수 가격 출력 -->
+                <div class="price-container">
+                    <label>선택한 투어 가격:</label>
+                    <span id="selected-price">-</span>
+                </div>
+
+                
+                <div class="button-container">
+                    <!-- 선택한 옵션의 투어 필터링 -->
+                    <input type="submit" value="가격 확인">
+
+                    <!-- 현재 화면에서 설정한 옵션 초기화 후 이전 화면으로 -->
+                    <input type="button" value="이전 화면으로" onclick="window.location.href='/';">
+                    
+                    <!-- 모든 가격 업데이트 후 마지막 화면으로 -->
+                    <input type="next" value="완료">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<script type='text/javascript'>
+    var divElement = document.getElementById('viz1684472621541');
+    var vizElement = divElement.getElementsByTagName('object')[0];
+    if (divElement.offsetWidth > 800) {
+        vizElement.style.minWidth = '1700px';
+        vizElement.style.maxWidth = '88%';
+        vizElement.style.minHeight = '587px';
+        vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
+    } else if (divElement.offsetWidth > 500) {
+        vizElement.style.minWidth = '420px';
+        vizElement.style.maxWidth = '100%';
+        vizElement.style.minHeight = '587px';
+        vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
+    } else {
+        vizElement.style.width = '100%';
+        vizElement.style.height = '877px';
+    } var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+</script>
